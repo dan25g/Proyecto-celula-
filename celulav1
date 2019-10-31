@@ -1,0 +1,77 @@
+program cultivo;
+uses crt;
+const
+max=30;
+min=1;
+type
+caldo=array[min..max,min..max] of char;
+var
+op,n,m:integer;
+aca,nexgen:caldo;
+procedure llenarcaldo(var ca:caldo; var n,m:integer);
+var
+c,f,i:integer;
+begin
+  writeln('Por favor ingrese el numero de filas y columnas que desea');
+  writeln('que tenga el caldo hasta un maximo de 30');
+  readln(n);
+  if (n>30) then begin
+   writeln('ERROR: Solo puede haber hasta un maximo de 30 filas y columnas');
+   readkey; end
+  else begin
+   writeln('Ingrese el numero de cedulas que desea ingresar');
+   readln(m);
+   if (m>(n*n)) then begin
+     writeln('ERROR: el numero de celulas es mayor al numero');
+     writeln('de filas y columnas disponibles'); readkey; end
+    else begin
+     for c:=1 to n do
+      for  f:=1  to n do
+       ca[f,c]:='.';
+     i:=1;
+     while (i<=m) do begin
+      randomize;
+      f:=random(n)+1;
+      c:=random(n)+1;
+      if (ca[f,c]<>'X') then begin
+       ca[f,c]:='X';
+       i:=i+1;
+      end;
+     end;
+
+    end;
+  end;
+end;
+procedure impcaldo(ca:caldo; n:integer);
+var
+f,c:integer;
+begin
+ for c:=1 to n do begin
+  writeln;
+  for  f:=1  to n do
+   write(ca[f,c],' ');
+ end;
+ readkey;
+end;
+procedure comprocaldo(ca:caldo; i,j:integer);
+begin
+
+end;
+begin
+ repeat
+  writeln('Bienvenido al PROYECTO AUTÓMATA CELULAR ALIVE (ACA)');
+  writeln('Escoga una opcion:');
+  writeln('1.Llenar el caldo');
+  writeln('2.Muestra el caldo');
+  writeln('0.Salir');
+  readln(op);
+  case op of
+   1:llenarcaldo(aca,n,m);
+   2:impcaldo(aca,n);
+   3:
+  end;
+  clrscr;
+  until (op=0);
+ writeln('hasta luego :3');
+ readkey;
+end.
